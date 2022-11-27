@@ -1,11 +1,15 @@
 package ru.myitschool.lab22toast;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.widget.EditText;
@@ -54,6 +58,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
+        super.onPostCreate(savedInstanceState, persistentState);
+        if (count % 2 == 0) {
+            Toast.makeText(getApplicationContext(), R.string.ndestroy2X, Toast.LENGTH_LONG).show();
+            System.out.println("I am working destroy");
+        }
+//        showToast(30,80,R.string.ncreate);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
 //        toast.cancel();
@@ -97,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
      protected void onPause() {
          super.onPause();
 
-         SharedPreferences.Editor ed = mPrefs.edit();
-         ed.putInt("view_mode", mCurViewMode);
-         ed.commit();
+//         SharedPreferences.Editor ed = mPrefs.edit();
+//         ed.putInt("view_mode", mCurViewMode);
+//         ed.commit();
 //         Toast.makeText(this, R.string.npause, Toast.LENGTH_LONG).show();
          showToast(10,10,R.string.npause);
      }
@@ -134,11 +148,18 @@ public class MainActivity extends AppCompatActivity {
 
         // Checks the orientation of the screen
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+
             Toast.makeText(this, "LanDsacape", Toast.LENGTH_LONG).show();
+
+//            Toast.makeText(this, "LanDsacape", Toast.LENGTH_LONG).show();
             count ++;
+            Log.d(TAG,"_____________11" + count);
+            System.out.println("_______________" + count);
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
             Toast.makeText(this, "PORTRAIT", Toast.LENGTH_LONG).show();
             count ++;
+            Log.d(TAG,"_______________" + count);
+            System.out.println("_______________" + count);
         }
     }
 
