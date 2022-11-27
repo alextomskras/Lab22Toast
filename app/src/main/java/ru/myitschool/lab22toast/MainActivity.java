@@ -142,17 +142,17 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void curOrient(){
-        int orientation = this.getResources().getConfiguration().orientation;
-        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            // code for portrait mode
-            Toast.makeText(this, "PORTRAIT", Toast.LENGTH_LONG).show();
-            count ++;
-        } else {
-            count ++;
-            Toast.makeText(this, "landscape", Toast.LENGTH_LONG).show();
-        }
-    }
+//    public void curOrient(){
+//        int orientation = this.getResources().getConfiguration().orientation;
+//        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+//            // code for portrait mode
+//            Toast.makeText(this, "PORTRAIT", Toast.LENGTH_LONG).show();
+//            count ++;
+//        } else {
+//            count ++;
+//            Toast.makeText(this, "landscape", Toast.LENGTH_LONG).show();
+//        }
+//    }
 
 
     public  void showToast(float Hr,float Vr, int idText) {
