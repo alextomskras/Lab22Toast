@@ -1,6 +1,7 @@
 package ru.myitschool.lab22toast;
 
 import static android.content.ContentValues.TAG;
+import static android.view.WindowManager.*;
 
 import android.app.Activity;
 import android.app.Application;
@@ -12,6 +13,7 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -19,26 +21,30 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import ru.myitschool.lab22toast.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
     private static int count = -1;
 
     private static int flag = -1;
+    private ActivityMainBinding binding;
     private Toast toast;
-    static final int DAY_VIEW_MODE = 0;
-    static final int WEEK_VIEW_MODE = 1;
 
-    private SharedPreferences mPrefs;
-    private int mCurViewMode;
 
 
     @Override
-    protected void onCreate(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(R.layout.activity_main);
+
 //        mPrefs = getSharedPreferences(getLocalClassName(), MODE_PRIVATE);
 //        mCurViewMode = mPrefs.getInt("view_mode",DAY_VIEW_MODE);
 
-        setContentView(R.layout.activity_main);
+
 //        int orientation = this.getResources().getConfiguration().orientation;
 //        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
 //            // code for portrait mode
@@ -49,10 +55,10 @@ public class MainActivity extends AppCompatActivity {
 //            Toast.makeText(this, "landscape", Toast.LENGTH_LONG).show();
 //        }
 //        Toast.makeText(getApplicationContext(), R.string.ncreate, Toast.LENGTH_LONG).show();
-//        if(flag != getResources().getConfiguration().orientation){
-//            count++;
-//        }
-//        flag=getResources().getConfiguration().orientation;
+        if(flag != getResources().getConfiguration().orientation){
+            count++;
+        }
+        flag=getResources().getConfiguration().orientation;
 //        Toast.makeText(getApplicationContext(), "flag", Toast.LENGTH_LONG).show();
         showToast(30,80,R.string.ncreate);
     }
@@ -60,10 +66,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onPostCreate(@Nullable Bundle savedInstanceState, @Nullable PersistableBundle persistentState) {
         super.onPostCreate(savedInstanceState, persistentState);
-        if (count % 2 == 0) {
-            Toast.makeText(getApplicationContext(), R.string.ndestroy2X, Toast.LENGTH_LONG).show();
-            System.out.println("I am working destroy");
-        }
+
+
 //        showToast(30,80,R.string.ncreate);
     }
 
@@ -109,59 +113,70 @@ public class MainActivity extends AppCompatActivity {
 
      @Override
      protected void onPause() {
+//         showToast(10,10,R.string.npause);
          super.onPause();
-
 //         SharedPreferences.Editor ed = mPrefs.edit();
 //         ed.putInt("view_mode", mCurViewMode);
 //         ed.commit();
 //         Toast.makeText(this, R.string.npause, Toast.LENGTH_LONG).show();
-         showToast(10,10,R.string.npause);
+
+
      }
 
      @Override
      protected void onStop() {
+//         showToast(10,10,R.string.nstop);
          super.onStop();
 //         Toast.makeText(this, R.string.nstop, Toast.LENGTH_LONG).show();
-         showToast(10,10,R.string.nstop);
+
      }
 
      @Override
      protected void onRestart(){
          super.onRestart();
-         showToast(10,10,R.string.nrestart);
+//         showToast(10,10,R.string.nrestart);
+
+
 //         Toast.makeText(this, R.string.nrestart, Toast.LENGTH_LONG).show();
      }
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
-        showToast(10,10,R.string.ndestroy);
+//        showToast(10,10,R.string.ndestroy);
         if (count % 2 == 0) {
-            Toast.makeText(getApplicationContext(), R.string.ndestroy2X, Toast.LENGTH_LONG).show();
-            System.out.println("I am working destroy");
+            showToast(10,10,R.string.ndestroy);
+//            Toast.makeText(getApplicationContext(), R.string.ndestroy2X, Toast.LENGTH_LONG).show();
+//            System.out.println("I am working destroy");
         }
+        super.onDestroy();
+
+
+//        finish();
 
     }
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
 
-        // Checks the orientation of the screen
-        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-
-            Toast.makeText(this, "LanDsacape", Toast.LENGTH_LONG).show();
-
-//            Toast.makeText(this, "LanDsacape", Toast.LENGTH_LONG).show();
-            count ++;
-            Log.d(TAG,"_____________11" + count);
-            System.out.println("_______________" + count);
-        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
-            Toast.makeText(this, "PORTRAIT", Toast.LENGTH_LONG).show();
-            count ++;
-            Log.d(TAG,"_______________" + count);
-            System.out.println("_______________" + count);
-        }
-    }
+//    @Override
+//    public void onConfigurationChanged(Configuration newConfig) {
+//        super.onConfigurationChanged(newConfig);
+//
+//        // Checks the orientation of the screen
+//        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+//            showToast(10,10,R.string.nlandscape);
+////            Toast.makeText(this, "LANDSCAPE", Toast.LENGTH_LONG).show();
+//
+////            Toast.makeText(this, "LanDsacape", Toast.LENGTH_LONG).show();
+//            count ++;
+//            Log.d(TAG,"_____________11" + count);
+//            System.out.println("_______________" + count);
+////            finish();
+//        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT){
+//            showToast(10,10,R.string.nportrait);
+////            Toast.makeText(this, "PORTRAIT", Toast.LENGTH_LONG).show();
+//            count ++;
+//            Log.d(TAG,"_______________" + count);
+//            System.out.println("_______________" + count);
+//        }
+//    }
 
 //    public void curOrient(){
 //        int orientation = this.getResources().getConfiguration().orientation;
@@ -177,15 +192,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public  void showToast(float Hr,float Vr, int idText) {
-        Context context = getApplicationContext();
+        Context context = this;
 
 //        String idText = toastString;
         int inText = idText;
         int duration = Toast.LENGTH_LONG;
 //        if (toast != null) {
 //            toast.cancel();
-////        Toast toast;
-////        toast.cancel();
+//        Toast toast;
+//        toast.cancel();
 //        }
         toast = Toast.makeText(context, inText, duration);
 //        toast.setMargin( Hr,Vr);

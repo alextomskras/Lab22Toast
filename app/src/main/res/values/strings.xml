@@ -8,5 +8,7 @@
     <string name="nstop">Activity STOPPED</string>
     <string name="ndestroy">Activity DESTROYED</string>
     <string name="ndestroy2X">Rotate Activity 2X DESTROYED</string>
+    <string name="nlandscape">LANDSCAPE</string>
+    <string name="nportrait">PORTRAIT</string>
 
 </resources>
